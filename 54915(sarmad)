@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+// Abstract class
+abstract class Account {
+    private double balance;
+    private String accountNumber;
+
+    public Account(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    abstract void deposit(double amount);
+
+    abstract void withdraw(double amount);
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+}
+
+// Inheritance and Polymorphism
+class SavingsAccount extends Account {
+    public SavingsAccount(String accountNumber) {
+        super(accountNumber);
+        this.balance = 0;
+    }
+
+    @Override
+    void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+}
+
+// Inheritance and Polymorphism
+class CheckingAccount extends Account {
+    public CheckingAccount(String accountNumber) {
+        super(accountNumber);
+        this.balance = 0;
+    }
+
+    @Override
+    void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+}
