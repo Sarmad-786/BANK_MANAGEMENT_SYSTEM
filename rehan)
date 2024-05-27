@@ -1,0 +1,71 @@
+// Abstraction
+interface Bank {
+    void openAccount(String accountType);
+
+    void closeAccount(String accountNumber);
+
+    void deposit(String accountNumber, double amount);
+
+    void withdraw(String accountNumber, double amount);
+
+    void checkBalance(String accountNumber);
+}
+
+// Encapsulation
+class BankSystem implements Bank {
+    private Account[] accounts;
+    private int numAccounts;
+
+    public BankSystem() {
+        accounts = new Account[100];
+        numAccounts = 0;
+    }
+
+    @Override
+    public void openAccount(String accountType) {
+        if (numAccounts < accounts.length) {
+            String accountNumber = generateAccountNumber();
+            if (accountType.equalsIgnoreCase("savings")) {
+                accounts[numAccounts++] = new SavingsAccount(accountNumber);
+            } else if (accountType.equalsIgnoreCase("checking")) {
+                accounts[numAccounts++] = new CheckingAccount(accountNumber);
+            } else {
+                System.out.println("Invalid account type.");
+            }
+        } else {
+            System.out.println("Maximum number of accounts reached.");
+        }
+    }
+
+    @Override
+    public void closeAccount(String accountNumber) {
+        for (int i = 0; i < numAccounts; i++) {
+            if (accounts[i].getAccountNumber().equals(accountNumber)) {
+                for (int j = i; j < numAccounts - 1; j++) {
+                    accounts[j] = accounts[j + 1];
+                }
+                accounts[--numAccounts] = null;
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void deposit(String accountNumber, double amount) {
+        for (int i = 0; i < numAccounts; i++) {
+            if (accounts[i].getAccountNumber().equals(accountNumber)) {
+                accounts[i].deposit(amount);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void withdraw(String accountNumber, double amount) {
+        for (int i = 0; i < numAccounts; i++) {
+            if (accounts[i].getAccountNumber().equals(accountNumber)) {
+                accounts[i].withdraw(amount);
+                break;
+            }
+        }
+    }
