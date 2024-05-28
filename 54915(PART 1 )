@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-// Abstract class
 abstract class Account {
     private double balance;
     private String accountNumber;
@@ -22,7 +21,6 @@ abstract class Account {
     }
 }
 
-// Inheritance and Polymorphism
 class SavingsAccount extends Account {
     public SavingsAccount(String accountNumber) {
         super(accountNumber);
@@ -44,7 +42,6 @@ class SavingsAccount extends Account {
     }
 }
 
-// Inheritance and Polymorphism
 class CheckingAccount extends Account {
     public CheckingAccount(String accountNumber) {
         super(accountNumber);
